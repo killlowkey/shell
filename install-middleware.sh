@@ -129,22 +129,6 @@ uninstall_etcd() {
     echo -e "${GREEN}Etcd 已卸载!${NC}"
 }
 
-install_kafka() {
-    read -p "请输入 Kafka 数据目录(默认为 /usr/local/data/kafka): " kafka_data_dir
-    kafka_data_dir=${kafka_data_dir:-/usr/local/data/kafka}
-    mkdir -p "$kafka_data_dir"
-
-    echo -e "${BLUE}正在安装 Kafka...${NC}"
-    docker run -d --name kafka -p 9092:9092 -v "$kafka_data_dir":/kafka -e KAFKA_ADVERTISED_HOST_NAME=`hostname -i` wurstmeister/kafka
-    echo -e "${GREEN}Kafka 安装完成!${NC}"
-}
-
-uninstall_kafka() {
-    echo -e "${BLUE}正在卸载 Kafka...${NC}"
-    docker stop kafka && docker rm kafka
-    echo -e "${GREEN}Kafka 已卸载!${NC}"
-}
-
 # 主菜单
 while true; do
     echo -e "${BLUE}请选择操作:${NC}"
@@ -158,8 +142,6 @@ while true; do
     echo "8) 卸载 PostgreSQL"
     echo "9) 安装 Etcd"
     echo "10) 卸载 Etcd"
-    echo "11) 安装 Kafka"
-    echo "12) 卸载 Kafka"
     echo "q) 退出"
     read -p "输入选项: " choice
 
@@ -174,8 +156,6 @@ while true; do
         8) uninstall_postgres ;;
         9) install_etcd ;;
         10) uninstall_etcd ;;
-        11) install_kafka ;;
-        12) uninstall_kafka ;;
         q) exit 0 ;;
         *) echo -e "${RED}无效选项,请重试!${NC}" ;;
     esac
