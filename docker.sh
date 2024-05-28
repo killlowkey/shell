@@ -39,6 +39,7 @@ install_docker() {
   warning_msg "正在安装 Docker..."
   sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
   sudo systemctl start docker
+  sudo systemctl enable docker
 
   # 设置国内源
   warning_msg "正在设置国内源..."
