@@ -44,11 +44,18 @@ install_docker() {
   # 设置国内源
   warning_msg "正在设置国内源..."
   sudo mkdir -p /etc/docker
-  sudo tee /etc/docker/daemon.json <<-'EOF'
-{
-  "registry-mirrors": ["https://ibirju58.mirror.aliyuncs.com"]
-}
-EOF
+  sudo tee /etc/docker/daemon.json <<EOF
+  {
+      "registry-mirrors": [
+          "https://hub.uuuadc.top",
+          "https://docker.anyhub.us.kg",
+          "https://dockerhub.jobcher.com",
+          "https://dockerhub.icu",
+          "https://docker.ckyl.me",
+          "https://docker.awsl9527.cn"
+      ]
+  }
+  EOF
   sudo systemctl daemon-reload
   sudo systemctl restart docker
 
